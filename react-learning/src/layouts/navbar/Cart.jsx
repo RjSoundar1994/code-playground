@@ -1,7 +1,10 @@
-export default function Cart({ items = [] }) {
-    console.log("Cart Items in Cart Component:", items);
-    const count = items.length;
+import { useContext } from "react";
+import { useSelector } from "react-redux";
 
+export default function Cart() {
+    const cartItem = useSelector((state) => state.cartInfo)
+    console.log('cartItem', cartItem)
+    const count = cartItem.length;
     return (
         <div className="cart-icon">
             <div>
