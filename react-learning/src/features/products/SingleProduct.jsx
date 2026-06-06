@@ -30,8 +30,6 @@ export default function SingleProduct({ id, productId }) {
                         <button className="goBack-button  link-active" onClick={() => productId('')}>Go Back</button>
                     </div>
                 </div>
-
-
             </div>
         </div>
     )

@@ -20,6 +20,18 @@
     margin-left: 3px;
 }
 
+.dealsNavbar a {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.dealsNavbar a:hover {
+    color: #fff !important;
+    /* color: #c45500 !important; */
+    cursor: pointer;
+    font-weight: bold;
+}
+
 .categoryNavbar {
     background-color: #fff;
     color: black;
@@ -96,7 +108,7 @@
     width: auto;
 }
 
-.cart-count {
+.cart-count{
     position: absolute;
     top: -5px;
     left: 20px;
@@ -107,7 +119,7 @@
     font-size: 12px;
     font-weight: bold;
 }
-
+.cart-count a {color: #fff; text-decoration: none;}
 .search-dropdown {
     background-color: #e6e6e6 !important;
     font-size: 13px;

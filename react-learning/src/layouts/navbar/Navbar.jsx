@@ -5,13 +5,14 @@ import Search from "./Search";
 import Account from "./Account";
 import OrdersReturn from "./OrdersReturn";
 import Cart from "./Cart";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
     return (
         <div >
             <div className="amazonNavbar d-flex ">
                 <div className="p-2 flex-fill logo child-div">
-                    <img src="./src/assets/white-amazon-logo.png" alt="Amazon Logo" className="amazonLogo" />
+                   <Link to="/"><img src="./src/assets/white-amazon-logo.png" alt="Amazon Logo" className="amazonLogo" /></Link>
                 </div>
                 <div className="p-2 flex-fill child-div location">
                     <Location />

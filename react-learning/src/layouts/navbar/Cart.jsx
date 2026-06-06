@@ -12,7 +12,7 @@ export default function Cart() {
                <Link to="/cart"><img src="./src/assets/cart-icon.webp" alt="Cart Icon" /></Link>
             </div>
             <div className="cart-count">
-                <strong>{count}</strong>
+               <Link to="/cart"><strong>{count}</strong></Link>
             </div>
         </div>
     )

@@ -2,19 +2,26 @@ import { useContext } from "react";
 import { useSelector } from "react-redux";
 import CommonList from "../../components/shared/CommonList";
 import Navbar from "../../layouts/navbar/Navbar";
+import { useDispatch } from "react-redux";
+import { removeCart } from "../../components/redux/cartSlice";
+
 export default function CartGrid() {
     let { ipaddress } = CommonList();
     const cartItem = useSelector((state) => state.cartInfo)
+    const dispatch = useDispatch();
+    function setRemoveItem(item) {
+        console.log('remove item', item)
+        if (item) {
+            dispatch(removeCart(item))
+        }
+    }
     return (
         <div >
             <Navbar />
             <div className="p-2">
-                <h4>Cart items</h4>
-                <div className="product-info">
-                    Check each product page for other buying options.
-                </div>
+                <h4>Shopping Cart</h4>
 
-                {cartItem ? cartItem.map((item, index) => (
+                {cartItem.length > 0 ? cartItem.map((item, index) => (
                     <div className="single-item d-flex">
                         <div className="p-2 max-height-250">
                             <img src={ipaddress + item.image} alt={item.name} className="single-item-image" />
@@ -28,7 +35,7 @@ export default function CartGrid() {
                                     <button className="add-to-cart-button link-active " >Buy</button>
                                 </div>
                                 <div>
-                                    <button className="goBack-button  link-active" >Remove</button>
+                                    <button className="goBack-button  link-active" onClick={() => setRemoveItem(item)}>Remove</button>
                                 </div>
                             </div>
                         </div>
