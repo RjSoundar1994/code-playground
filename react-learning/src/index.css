@@ -31,7 +31,9 @@
     cursor: pointer;
     font-weight: bold;
 }
-
+a {
+    text-decoration: none!important;
+}
 .categoryNavbar {
     background-color: #fff;
     color: black;
@@ -108,7 +110,7 @@
     width: auto;
 }
 
-.cart-count{
+.cart-count {
     position: absolute;
     top: -5px;
     left: 20px;
@@ -119,7 +121,12 @@
     font-size: 12px;
     font-weight: bold;
 }
-.cart-count a {color: #fff; text-decoration: none;}
+
+.cart-count a {
+    color: #fff;
+    text-decoration: none;
+}
+
 .search-dropdown {
     background-color: #e6e6e6 !important;
     font-size: 13px;
@@ -251,4 +258,24 @@
     max-width: 200px;
     height: 250px;
     object-fit: cover;
+}
+
+.modal {
+    display: block !important;
+    background-color: #00000061;
+}
+
+.registerNavbar {
+    background-color: #f5f3ef;
+    height: 60px;
+    margin: 0;
+    padding: 5px 10px;
+    justify-content: space-evenly;
+}
+
+.bg-color-2 {
+    background-color: #f5f3ef;
+}
+.mt-10{
+      margin-top: 20px;
 }
