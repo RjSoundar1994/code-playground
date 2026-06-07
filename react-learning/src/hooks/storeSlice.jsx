@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
     user: { 
-        name: localStorage.getItem('userName') || null, 
+        // name: null, 
+        name: localStorage.getItem('userName') ? localStorage.getItem('userName') : null, 
         cin: '',
          email: '' 
         },

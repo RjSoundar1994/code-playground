@@ -16,28 +16,28 @@ export default function LoginForm() {
     const onSubmit = async (value) => {
         console.log('form value', value)
         if (value.email && value.password) {
-            // const email = value.email;
-            // const password = value.password;
-            // const userName = 'Soundar'
-            // dispatch(loginUserCase({ user: { email, password, userName }, token: "123456789Token" }));
+            const email = value.email;
+            const password = value.password;
+            const userName = 'Soundar'
+            dispatch(loginUserCase({ user: { email, password, userName }, token: "123456789Token" }));
 
-            let payload = {
-                email: value.email,
-                password: value.password
-            }
-            console.log('payload', payload)
-            const data = await userService.post(payload, '/private/api/login');
-            console.log('login data', data)
-            if (data) {
-                console.log('login data two', data)
-                try {
-                    dispatch(loginUserCase({ user: { email, password, userName }, token: "123456789Token" }));
-                } catch (err) {
-                    setError(err.response?.data?.message || "Failed to fetch");
-                } finally {
-                    // setLoading(false);
-                }
-            }
+            // let payload = {
+            //     email: value.email,
+            //     password: value.password
+            // }
+            // console.log('payload', payload)
+            // const data = await userService.post(payload, '/private/api/login');
+            // console.log('login data', data)
+            // if (data) {
+            //     console.log('login data two', data)
+            //     try {
+            //         dispatch(loginUserCase({ user: { email, password, userName }, token: "123456789Token" }));
+            //     } catch (err) {
+            //         setError(err.response?.data?.message || "Failed to fetch");
+            //     } finally {
+            //         // setLoading(false);
+            //     }
+            // }
 
         }
     };
