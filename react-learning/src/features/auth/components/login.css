@@ -102,6 +102,7 @@ img {
 
 
 .main {
+	background-color: #f1f5f9;
 	.wrapper {
 		max-width: 28rem;
 		width: 100%;
