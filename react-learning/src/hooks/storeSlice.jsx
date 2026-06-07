@@ -1,9 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-    user: null,
-    token: null,
-    isAuthenticated: false,
+    user: { 
+        name: localStorage.getItem('userName') || null, 
+        cin: '',
+         email: '' 
+        },
+    token: localStorage.getItem('token') || null,
+    isAuthenticated: !!localStorage.getItem('token'),
     loading: false,
     error: null,
     cartInfo: []
@@ -18,15 +22,19 @@ const storeSlice = createSlice({
             console.log('payload', action.payload)
             state.loading = false;
             state.isAuthenticated = true;
-            state.user = action.payload.user;
+            state.user.name = action.payload?.user?.userName;
+            state.user.email = action.payload?.user?.email;
             state.token = action.payload.token;
             state.cartInfo = [];
+            localStorage.setItem('token', action.payload.token)
+            localStorage.setItem('userName', action.payload.user.userName)
         },
         removeloginUserCase(state, action) {
             state.loading = false;
             state.error = action.payload;
             state.isAuthenticated = false;
             state.cartInfo = [];
+            localStorage.clear();
         },
         // Logout
         userLogoutCase(state, action) {
@@ -34,6 +42,7 @@ const storeSlice = createSlice({
             state.token = null;
             state.isAuthenticated = false;
             state.cartInfo = [];
+            localStorage.clear();
         },
         // Cart Info
         addCartCase(state, action) {
@@ -47,41 +56,10 @@ const storeSlice = createSlice({
         },
         removeCartCase(state, action) {
             console.log('state-remove', action.payload)
-            console.log('state.cartInfo', state.cartInfo)
             const removeItems = action.payload;
-            state.cartInfo.filter((item) => item.id !== removeItems.id)
+            state.cartInfo = state.cartInfo.filter((item) => item.id !== removeItems.id)
         }
-    },
-    // extraReducers: (builder) => {
-    //     builder
-    //         // Login
-    //         .loginUserCase((state, action) => {
-    //             state.loading = false;
-    //             state.isAuthenticated = true;
-    //             state.user = action.payload.user;
-    //             state.token = action.payload.token;
-    //         })
-    //         .removeloginUserCase((state, action) => {
-    //             state.loading = false;
-    //             state.error = action.payload;
-    //             state.isAuthenticated = false;
-    //         })
-    //         // Logout
-    //         .userLogoutCase((state) => {
-    //             state.user = null;
-    //             state.token = null;
-    //             state.isAuthenticated = false;
-    //         })
-    //         // Cart Info
-    //         .addCartCase((state, action) => {
-    //             const exitItem = state.find((item) => { return item.id == action.payload.id })
-    //             if (!exitItem) {
-    //                 state.cartInfo.push(action.payload)
-    //             } else {
-    //                 alert(`you are attempting to add a product that is already sitting in your cart. product name :  ${action.payload.name}`)
-    //             }
-    //         })
-    // },
+    }
 })
 export const { clearError, loginUserCase, removeloginUserCase, userLogoutCase, addCartCase, removeCartCase } = storeSlice.actions;
 export default storeSlice.reducer;

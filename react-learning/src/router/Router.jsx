@@ -5,6 +5,7 @@ import ForgotPassword from "../features/auth/components/ForgotPassword";
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "../features/pages/components/Home";
 import CartItem from "../features/pages/components/CartItem";
+import NotFound from "../features/shared/NotFound";
 
 export default function Router() {
     return (
@@ -18,6 +19,7 @@ export default function Router() {
                     <Route path="/home" element={<Home />}></Route>
                     <Route path="/cart" element={<CartItem />}></Route>
                 </Route>
+                <Route path="/*" element={<NotFound/>}></Route>
             </Routes>
         </BrowserRouter>
     )

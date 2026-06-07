@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import SubNav from "./SubNav";
 import Cart from "./Cart";
+import Location from "./Location";
+import Search from "./Search";
+import Account from "./Account";
+import OrdersReturn from "./OrdersReturn";
 
 export default function TopNav(){
     return(
@@ -10,16 +14,16 @@ export default function TopNav(){
                            <Link to="/"><img src="./src/assets/white-amazon-logo.png" alt="Amazon Logo" className="amazonLogo" /></Link>
                         </div>
                         <div className="p-2 flex-fill child-div location">
-                            {/* <Location /> */}
+                            <Location />
                         </div>
                         <div className="p-2 flex-fill child-div search">
-                            {/* <Search /> */}
+                            <Search />
                         </div>
                         <div className="p-2 flex-fill child-div">
-                            {/* <Account /> */}
+                            <Account />
                         </div>
                         <div className="p-2 flex-fill child-div">
-                            {/* <OrdersReturn /> */}
+                            <OrdersReturn />
                         </div>
                         <div className="p-2 flex-fill child-div">
                             <Cart />
