@@ -1,9 +1,9 @@
-import CommonList from "../../components/shared/CommonList";
+import CommonInfo from "../../../shared/CommonInfo";
 import { useDispatch } from "react-redux";
-import { addCart as addCartAction } from "../../components/redux/cartSlice"
+import { addCartCase } from "../../../../hooks/storeSlice"
 
 export default function ProductCard({ onSend }) {
-    let { itemLists, ipaddress } = CommonList();
+    let { itemLists, ipaddress } = CommonInfo();
     const dispatch = useDispatch();
 
     const goToProduct = (id) => {
@@ -14,7 +14,7 @@ export default function ProductCard({ onSend }) {
     const setAddItem = (item) => {
         console.log('item', item)
         if (item) {
-            dispatch(addCartAction(item));
+            dispatch(addCartCase(item));
         }
     }
 

@@ -1,23 +1,21 @@
-import { useContext } from "react";
-import { useSelector } from "react-redux";
-import CommonList from "../../components/shared/CommonList";
-import Navbar from "../../layouts/navbar/Navbar";
-import { useDispatch } from "react-redux";
-import { removeCart } from "../../components/redux/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import CommonInfo from "../../shared/CommonInfo";
+import TopNav from "../../../layouts/TopNav";
+import { removeCartCase } from "../../../hooks/storeSlice"
 
-export default function CartGrid() {
-    let { ipaddress } = CommonList();
-    const cartItem = useSelector((state) => state.cartInfo)
+export default function CartItem() {
+    let { ipaddress } = CommonInfo();
+    const cartItem = useSelector((state) => state.amazonInfo.cartInfo)
     const dispatch = useDispatch();
     function setRemoveItem(item) {
         console.log('remove item', item)
         if (item) {
-            dispatch(removeCart(item))
+            dispatch(removeCartCase(item))
         }
     }
     return (
         <div >
-            <Navbar />
+            <TopNav />
             <div className="p-2">
                 <h4>Shopping Cart</h4>
 
@@ -41,7 +39,6 @@ export default function CartGrid() {
                         </div>
                     </div>
                 )) : <p>No products available in cart.</p>}
-
             </div>
         </div>
     )

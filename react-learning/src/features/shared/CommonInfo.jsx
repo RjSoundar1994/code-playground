@@ -1,4 +1,4 @@
-function CommonList() {
+function CommonInfo() {
     let menuList = [
         {
             'title': "Electronics",
@@ -178,4 +178,4 @@ function CommonList() {
     let ipaddress = "http://localhost:5173/"
     return { menuList, brandList, dealsMenuList, itemLists, ipaddress };
 }
-export default CommonList;
+export default CommonInfo;

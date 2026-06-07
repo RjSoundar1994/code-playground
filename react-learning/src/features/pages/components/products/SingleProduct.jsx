@@ -1,15 +1,15 @@
-import CommonList from "../../components/shared/CommonList";
+import CommonInfo from "../../../shared/CommonInfo";
 import { useDispatch } from "react-redux";
-import { addCart as addCartAction } from "../../components/redux/cartSlice"
+import { addCartCase } from "../../../../hooks/storeSlice"
 
 export default function SingleProduct({ id, productId }) {
-    let { itemLists, ipaddress } = CommonList();
+    let { itemLists, ipaddress } = CommonInfo();
     const item = itemLists?.find((i) => i.id === id);
     const dispatch = useDispatch();
     const setAddItem = (item) => {
         console.log('item', item)
         if (item) {
-            dispatch(addCartAction(item));
+            dispatch(addCartCase(item));
         }
     }
 

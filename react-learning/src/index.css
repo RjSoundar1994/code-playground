@@ -1,4 +1,4 @@
-.amazonNavbar {
+.navbar {
     background-color: #131921;
     color: white;
     height: 60px;
@@ -31,9 +31,11 @@
     cursor: pointer;
     font-weight: bold;
 }
+
 a {
-    text-decoration: none!important;
+    text-decoration: none !important;
 }
+
 .categoryNavbar {
     background-color: #fff;
     color: black;
@@ -276,6 +278,7 @@ a {
 .bg-color-2 {
     background-color: #f5f3ef;
 }
-.mt-10{
-      margin-top: 20px;
+
+.mt-10 {
+    margin-top: 20px;
 }
