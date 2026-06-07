@@ -3,18 +3,42 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUserCase } from "../../../hooks/storeSlice";
 import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { userService } from "../services/userService";
 
 export default function LoginForm() {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
-    const onSubmit = (value) => {
+    const [error, setError] = useState(null);
+
+    const onSubmit = async (value) => {
         console.log('form value', value)
         if (value.email && value.password) {
-            const email = value.email;
-            const password = value.password;
-            const userName = 'Soundar'
-            dispatch(loginUserCase({ user: { email, password, userName }, token: "123456789Token" }));
+            // const email = value.email;
+            // const password = value.password;
+            // const userName = 'Soundar'
+            // dispatch(loginUserCase({ user: { email, password, userName }, token: "123456789Token" }));
+
+            let payload = {
+                email: value.email,
+                password: value.password
+            }
+            console.log('payload', payload)
+            const data = await userService.post(payload, '/private/api/login');
+            console.log('login data', data)
+            if (data) {
+                console.log('login data two', data)
+                try {
+                    dispatch(loginUserCase({ user: { email, password, userName }, token: "123456789Token" }));
+                } catch (err) {
+                    setError(err.response?.data?.message || "Failed to fetch");
+                } finally {
+                    // setLoading(false);
+                }
+            }
+
         }
     };
     const isAuthenticated = useSelector((state) => state.amazonInfo.isAuthenticated)
