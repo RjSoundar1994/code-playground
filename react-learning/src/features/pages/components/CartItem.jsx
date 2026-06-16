@@ -1,45 +1,62 @@
-import { useSelector, useDispatch } from "react-redux";
-import CommonInfo from "../../shared/CommonInfo";
-import TopNav from "../../../layouts/TopNav";
-import { removeCartCase } from "../../../hooks/storeSlice"
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCart } from '../../../hooks/storeSlice';
+import CommonInfo from '../../shared/CommonInfo';
+import TopNav from '../../../layouts/TopNav';
 
 export default function CartItem() {
-    let { ipaddress } = CommonInfo();
-    const cartItem = useSelector((state) => state.amazonInfo.cartInfo)
-    const dispatch = useDispatch();
-    function setRemoveItem(item) {
-        console.log('remove item', item)
-        if (item) {
-            dispatch(removeCartCase(item))
-        }
-    }
-    return (
-        <div >
-            <TopNav />
-            <div className="p-2">
-                <h4>Shopping Cart</h4>
+  const { ipaddress } = CommonInfo();
+  const cartItems = useSelector((state) => state.amazonInfo.cartInfo);
+  const dispatch = useDispatch();
 
-                {cartItem.length > 0 ? cartItem.map((item, index) => (
-                    <div className="single-item d-flex">
-                        <div className="p-2 max-height-250">
-                            <img src={ipaddress + item.image} alt={item.name} className="single-item-image" />
-                        </div>
-                        <div className="p-2">
-                            <h3 className="single-item-name">{item.name}</h3>
-                            <p className="product-price">₹{item.price}</p>
-                            <p className="single-item-rating">Rating: {item.rating} ({item.reviews} reviews)</p>
-                            <div className="d-flex p-2">
-                                <div className="mr-2">
-                                    <button className="add-to-cart-button link-active " >Buy</button>
-                                </div>
-                                <div>
-                                    <button className="goBack-button  link-active" onClick={() => setRemoveItem(item)}>Remove</button>
-                                </div>
-                            </div>
-                        </div>
+  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+
+  return (
+    <div>
+      <TopNav />
+      <div className="p-2">
+        <h4>Shopping Cart</h4>
+
+        {cartItems.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          <>
+            {cartItems.map((item) => (
+              <div key={item.id} className="single-item d-flex">
+                <div className="p-2 max-height-250">
+                  <img src={ipaddress + item.image} alt={item.name} className="single-item-image" />
+                </div>
+                <div className="p-2">
+                  <h3 className="single-item-name">{item.name}</h3>
+                  <p className="product-price">₹{item.price.toLocaleString('en-IN')}</p>
+                  <p className="single-item-rating">
+                    ⭐ {item.rating} ({item.reviews.toLocaleString()} reviews)
+                  </p>
+                  <div className="d-flex p-2">
+                    <div className="mr-2">
+                      <button className="add-to-cart-button link-active">Buy Now</button>
                     </div>
-                )) : <p>No products available in cart.</p>}
+                    <div>
+                      <button
+                        className="goBack-button link-active"
+                        onClick={() => dispatch(removeFromCart(item))}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            <div className="cart-total mt-3 p-2">
+              <strong>
+                Subtotal ({cartItems.length} item{cartItems.length !== 1 ? 's' : ''}):
+                ₹{total.toLocaleString('en-IN')}
+              </strong>
             </div>
-        </div>
-    )
+          </>
+        )}
+      </div>
+    </div>
+  );
 }

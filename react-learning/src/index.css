@@ -284,3 +284,32 @@ a {
 .mt-10 {
     margin-top: 20px;
 }
+.cart-total {
+    border-top: 1px solid #ccc;
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+.single-item {
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 8px;
+}
+
+.single-item-image {
+    max-width: 180px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.single-item-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.single-item-rating {
+    font-size: 14px;
+    color: #555;
+}

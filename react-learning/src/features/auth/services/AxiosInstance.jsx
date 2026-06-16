@@ -1,17 +1,20 @@
-import axios from "axios";
+import axios from 'axios';
+import ENV from '../../../config/environment';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5173',
-  timeout: 10000,
-  headers: { "Content-Type": "application/json" },
+  baseURL: ENV.API_BASE_URL,
+  timeout: ENV.TIMEOUT,
+  headers: { 'Content-Type': 'application/json' },
 });
 
 // ── Request Interceptor ──────────────────────────
 api.interceptors.request.use(
   (config) => {
-    // Add request timestamp for debugging
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     config.metadata = { startTime: Date.now() };
-    // console.log(`→ [${config.method?.toUpperCase()}] ${config.url}`);
     return config;
   },
   (error) => Promise.reject(error)
@@ -25,8 +28,8 @@ api.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const status  = error.response?.status;
-    const config  = error.config;
+    const status = error.response?.status;
+    const config = error.config;
 
     // Auto-retry once on network error
     if (!error.response && !config._retry) {
@@ -35,19 +38,20 @@ api.interceptors.response.use(
     }
 
     switch (status) {
-      case 401: {
-        localStorage.removeItem("token");
-        window.location.href = "/login";
+      case 401:
+        localStorage.removeItem('token');
+        window.location.href = '/login';
         break;
-      }
       case 403:
-        window.location.href = "/login";
+        window.location.href = '/login';
         break;
       case 404:
-        console.warn("Resource not found:", config.url);
+        console.warn('Resource not found:', config.url);
         break;
       case 500:
-        console.error("Server error");
+        console.error('Server error');
+        break;
+      default:
         break;
     }
 

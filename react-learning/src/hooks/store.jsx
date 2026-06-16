@@ -1,8 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import storeInfo from "./storeSlice"
+import { configureStore } from '@reduxjs/toolkit';
+import storeReducer from './storeSlice';
+
 export const store = configureStore({
-    devTools: true,
-    reducer: {
-        amazonInfo: storeInfo
-    }
-})
+  devTools: import.meta.env.DEV,  // disable devtools in production
+  reducer: {
+    amazonInfo: storeReducer,
+  },
+});

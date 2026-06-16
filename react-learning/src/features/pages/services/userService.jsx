@@ -1,8 +1,10 @@
-import api from "./AxiosInstance";
+import api from './AxiosInstance';
 
-export const userService = {
-    post: (payload, api) => api.post(api, payload),
-    put: (payload, api) => api.put(api, payload),
-    get: (payload, api) => api.post(api),
-    delete: (payload, api) => api.post(api)
-}
+// All product / page-level API calls go here
+export const pageService = {
+  getProducts: () => api.get('/api/products'),
+  getProductById: (id) => api.get(`/api/products/${id}`),
+  addToCart: (payload) => api.post('/api/cart', payload),
+  removeFromCart: (id) => api.delete(`/api/cart/${id}`),
+  getCart: () => api.get('/api/cart'),
+};
