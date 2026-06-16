@@ -7,7 +7,7 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-// ── Request Interceptor ──────────────────────────
+// Request Interceptor
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -20,7 +20,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// ── Response Interceptor ─────────────────────────
+// Response Interceptor
 api.interceptors.response.use(
   (response) => {
     const duration = Date.now() - response.config.metadata?.startTime;

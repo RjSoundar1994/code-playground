@@ -16,7 +16,7 @@ const storeSlice = createSlice({
   name: 'storeInfo',
   initialState,
   reducers: {
-    // ── Auth ────────────────────────────────────
+    // Auth
     setLoading(state, action) {
       state.loading = action.payload;
     },
@@ -49,7 +49,7 @@ const storeSlice = createSlice({
       state.error = null;
     },
 
-    // ── Cart ─────────────────────────────────────
+    // Cart
     addToCart(state, action) {
       const exists = state.cartInfo.some((item) => item.id === action.payload.id);
       if (!exists) {
